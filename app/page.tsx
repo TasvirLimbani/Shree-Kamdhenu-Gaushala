@@ -70,7 +70,7 @@ export default function Page() {
       <header className="topbar">
         <a href="#home" className="brand" aria-label="Shree Kamdhenu Gaushala home"><span className="brand-mark"><Heart size={18} fill="currentColor" /></span><span>Kamdhenu<br /><small>GAUSHALA</small></span></a>
         <nav className={`nav-links  ${menuOpen ? 'is-open' : ''}`}>
-          {['Our care', 'Impact', 'Team', 'Visit', 'FAQ', 'Location'].map((link) => <a href={`#${link.toLowerCase().replace(' ', '-')}`} key={link} onClick={() => setMenuOpen(false)}>{link}</a>)}
+          {['Impact', 'Our care', 'Visit', 'Team', 'FAQ', 'Location'].map((link) => <a href={`#${link.toLowerCase().replace(' ', '-')}`} key={link} onClick={() => setMenuOpen(false)}>{link}</a>)}
           <a className="nav-donate" href="#donate" onClick={() => setMenuOpen(false)}>Donate <ArrowRight size={15} /></a>
         </nav>
         <button className="menu-button" aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
@@ -107,8 +107,55 @@ export default function Page() {
 
       <section id="donate" className="donate-section section-pad"><div className="donate-panel"><div className="donate-copy"><div className="section-kicker">Your seva, made tangible</div><h2>One meal can<br /><em>change a day.</em></h2><p>Choose a daily care contribution and help us keep every bowl full and every shelter warm.</p><div className="amounts">{[51, 101, 251, 501, 1001].map((value) => <button key={value} className={amount === value ? 'amount active' : 'amount'} onClick={() => setAmount(value)}>₹{value.toLocaleString('en-IN')}</button>)}</div><button className="button button-primary" onClick={() => { setSubmitted(true); window.setTimeout(() => { window.location.href = `https://wa.me/919664917815?text=${encodeURIComponent(`Namaste, I would like to donate ₹${amount.toLocaleString('en-IN')} to Shree Kamdhenu Gaushala.`)}` }, 700) }}>Give ₹{amount.toLocaleString('en-IN')} today <Heart size={17} fill="currentColor" /></button>{submitted && <motion.p className="success-note" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>Thank you. Opening WhatsApp to complete your seva chat...</motion.p>}</div><div className="donate-visual"><img src={`https://github.com/TasvirLimbani/Image/blob/main/Gemini_Generated_Image_wpnzv4wpnzv4wpnz.png?raw=true`} alt="A calm cow looking toward the camera" /><div className="donate-stamp"><Heart size={20} fill="currentColor" /><span>Seva<br />starts<br />with us.</span></div></div></div></section>
 
-      <section id="visit" className="visit-section section-pad"><Reveal><div className="visit-card"><div><div className="section-kicker">Come say hello</div><h2>There is always<br /><em>room at the table.</em></h2><p>Visit us in Surat for a quiet afternoon with the residents of Kamdhenu. Bring your family, your questions, and an open heart.</p><div className="visit-details"><span><Clock3 /> By appointment</span><span><MapPin /> Surat, Gujarat</span></div><a className="button button-light" href="mailto:kamdhenugaushal@gmail.com">Arrange a visit <ArrowRight size={17} /></a></div><div className="visit-photo"><img src={`https://github.com/TasvirLimbani/Image/blob/main/IMG_4607.png?raw=true`} alt="Green field where visitors can spend time with cows" /></div></div></Reveal></section>
+      <section id="visit" className="visit-section section-pad">
+        <Reveal>
+          <div className="visit-card">
+            <div>
+              <div className="section-kicker">Come say hello</div>
 
+              <h2>
+                There is always
+                <br />
+                <em>room at the table.</em>
+              </h2>
+
+              <p>
+                Visit us in Surat for a quiet afternoon with the residents of
+                Kamdhenu. Bring your family, your questions, and an open heart.
+              </p>
+
+              <div className="visit-details">
+                <span>
+                  <Clock3 /> By appointment
+                </span>
+
+                <span>
+                  <MapPin /> Surat, Gujarat
+                </span>
+              </div>
+
+              <a
+                className="button button-light"
+                href={`https://wa.me/919664917815?text=${encodeURIComponent(
+                  "Namaste, I would like to visit Shri Kamdhenu Gaushala. May I come to the Gaushala?"
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Arrange a visit on WhatsApp"
+              >
+                Arrange a visit <ArrowRight size={17} />
+              </a>
+            </div>
+
+            <div className="visit-photo">
+              <img
+                src="https://github.com/TasvirLimbani/Image/blob/main/IMG_4607.png?raw=true"
+                alt="Green field where visitors can spend time with cows"
+              />
+            </div>
+          </div>
+        </Reveal>
+      </section>
       <section className="volunteer-section section-pad"><Reveal><div className="section-kicker">There is a place for you here</div><h2>Bring your hands.<br /><em>Bring your heart.</em></h2><p>Whether you have one hour or one hundred, your time can become shelter, nourishment, and hope.</p><a className="text-link" href="mailto:volunteer@kamdhenugaushala.org">Become a volunteer <ArrowRight size={16} /></a></Reveal></section>
 
       <section id="team" className="team-section section-pad"><Reveal><div className="section-kicker">The people behind the seva</div><h2>Many hands.<br /><em>One loving purpose.</em></h2></Reveal><Stagger className="team-grid">{team.map((member) => <motion.article className="team-card" key={member.name} variants={{ hidden: { opacity: 0, y: 26 }, show: { opacity: 1, y: 0, transition: { duration: .7, ease } } }} whileHover={{ y: -7 }}><img src={`${member.image}`} alt={`${member.name}, ${member.role}`} /><div><h3>{member.name}</h3><p>{member.role}</p></div></motion.article>)}</Stagger></section>
